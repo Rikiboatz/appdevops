@@ -10,9 +10,9 @@ concurrency:
   group: build-deploy-${{ github.ref }}
   cancel-in-progress: true
 
-  env:
-    # Java
-    JAVA_VERSION: '21'
+env:
+  # Java
+  JAVA_VERSION: '21'
 
 jobs:
   build-test:
