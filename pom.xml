@@ -45,7 +45,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<image>
-					<name>ghcr.io/${env.GITHUB_REPOSITORY}/myapp-java:${env.GIT_SHORT_SHA}</name>
+					<name>ghcr.io/${env.GITHUB_REPOSITORY}/appdevops:${env.GIT_SHORT_SHA}</name>
 					</image>
 				</configuration>
 			</plugin>
@@ -56,6 +56,20 @@
 				<configuration>
 				<release>${java.version}</release>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+				<useSystemClassLoader>true</useSystemClassLoader>
+				<includes>
+					<include>**/*Test.java</include>
+				</includes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
