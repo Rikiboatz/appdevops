@@ -1,0 +1,37 @@
+name: CI (Build, Test, Trivy)
+
+on:
+  pull_request:
+  push:
+    branches: ["main", "dev", "staging"]
+
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+      - name: Build & Test
+        run: |
+          cd app
+          mvn -B -DskipTests=false test package
+      - name: Build Docker image
+        run: |
+          docker build -t myapp-java:ci app
+      - name: Trivy FS scan (source)
+        uses: aquasecurity/trivy-action@0.24.0
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'table'
+          exit-code: '0'
+      - name: Trivy Image scan
+        uses: aquasecurity/trivy-action@0.24.0
+        with:
+          image-ref: 'myapp-java:ci'
+          format: 'table'
+          exit-code: '0'
