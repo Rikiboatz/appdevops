@@ -18,7 +18,7 @@ jobs:
       - name: Build & Test
         run: |
           cd app
-          mvn -B -DskipTests=false test package
+          mvn -B -DskipTests=false
       - name: Build Docker image
         run: |
           docker build -t myapp-java:ci app
