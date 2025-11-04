@@ -9,11 +9,6 @@ on:
 concurrency:
   group: build-deploy-${{ github.ref }}
   cancel-in-progress: true
-  
-
-env:
-  # Java
-  JAVA_VERSION: '21'
 
 jobs:
   build-test:
@@ -26,7 +21,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: ${{ env.JAVA_VERSION }}
+          java-version: '21'
           cache: maven
 
       - name: Build & Test
