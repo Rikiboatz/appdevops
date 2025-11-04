@@ -3,7 +3,7 @@ name: CI (Build, Test, Trivy)
 on:
   pull_request:
   push:
-    branches: ["main", "dev", "staging"]
+    branches: ["main", "develop", "staging"]
 
 # ป้องกัน deploy ซ้อนทับ
 concurrency:
