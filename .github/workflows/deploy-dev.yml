@@ -8,6 +8,8 @@ permissions:
   contents: read
   packages: write
 
+env:
+  REPO_LOWER: ${{ github.repository | toLower }}
 
 jobs:
   build-push:
@@ -25,8 +27,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build & Push (tag dev)
-        env:
-          REPO_LOWER: ${{ github.repository | toLower }}
         run: |
           SHORT_SHA=$(git rev-parse --short HEAD)
           IMAGE=ghcr.io/${REPO_LOWER}/appdevops
