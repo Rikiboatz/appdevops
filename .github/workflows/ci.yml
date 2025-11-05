@@ -38,7 +38,6 @@ jobs:
 
       - name: Build Docker image
         run: |
-          cd app
           docker build -t appdevops:ci .
 
       - name: Trivy FS scan (source)
