@@ -38,7 +38,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t appdevops:ci
+          cd app
+          docker build -t appdevops:ci .
 
       - name: Trivy FS scan (source)
         uses: aquasecurity/trivy-action@0.24.0
