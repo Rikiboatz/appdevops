@@ -34,6 +34,6 @@ jobs:
           SHORT_SHA: ${{ github.sha }}
           IMAGE: ghcr.io/${{ env.OWNER_LOWER }}/${{ env.REPO_LOWER }}/appdevops
         run: |
-          docker build -t $IMAGE:${SHORT_SHA:0:7} -t $IMAGE:latest-dev app
+          docker build -t $IMAGE:${SHORT_SHA:0:7} -t $IMAGE:latest-dev
           docker push $IMAGE:${SHORT_SHA:0:7}
           docker push $IMAGE:latest-dev
