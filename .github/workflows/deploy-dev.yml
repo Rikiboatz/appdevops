@@ -27,7 +27,7 @@ jobs:
       - name: Build & Push (tag dev)
         run: |
           SHORT_SHA=$(git rev-parse --short HEAD)
-          IMAGE=ghcr.io/${{ github.repository.toLower() | toLower }}/appdevops
+          IMAGE=ghcr.io/${{ github.repository.toLower() }}/appdevops
           docker build -t $IMAGE:$SHORT_SHA -t $IMAGE:latest-dev app
           docker push $IMAGE:$SHORT_SHA
           docker push $IMAGE:latest-dev
