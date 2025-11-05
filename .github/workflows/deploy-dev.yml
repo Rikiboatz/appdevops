@@ -8,8 +8,6 @@ permissions:
   contents: read
   packages: write
 
-env:
-  REPO_LOWER: ${{ github.repository | toLower }}
 
 jobs:
   build-push:
@@ -29,7 +27,7 @@ jobs:
       - name: Build & Push (tag dev)
         run: |
           SHORT_SHA=$(git rev-parse --short HEAD)
-          IMAGE=ghcr.io/${REPO_LOWER}/appdevops
+          IMAGE=ghcr.io/${{ github.repository.toLower() | toLower }}/appdevops
           docker build -t $IMAGE:$SHORT_SHA -t $IMAGE:latest-dev app
           docker push $IMAGE:$SHORT_SHA
           docker push $IMAGE:latest-dev
