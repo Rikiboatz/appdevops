@@ -1,0 +1,23 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["prometheus:9090"]
+
+  - job_name: "node_exporter"
+    static_configs:
+      - targets: ["node-exporter:9100"]
+
+  - job_name: "cadvisor"
+    static_configs:
+      - targets: ["cadvisor:8080"]
+
+  # ถ้า Spring Boot app เปิด actuator prometheus endpoint
+  - job_name: "springboot-app"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: ["host.docker.internal:8080"] # สำหรับ Windows/Mac
+      # - targets: ["app:8080"]                # ถ้า app รันใน container เดียวกัน
