@@ -16,8 +16,8 @@ scrape_configs:
       - targets: ["cadvisor:8080"]
 
   # ถ้า Spring Boot app เปิด actuator prometheus endpoint
-  - job_name: "springboot-app"
+  - job_name: "appdevops"
     metrics_path: "/actuator/prometheus"
     static_configs:
-      - targets: ["host.docker.internal:8080"] # สำหรับ Windows/Mac
+      - targets: ["host.docker.internal:9000"] # สำหรับ Windows/Mac
       # - targets: ["app:8080"]                # ถ้า app รันใน container เดียวกัน
