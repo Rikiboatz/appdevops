@@ -19,5 +19,5 @@ scrape_configs:
   - job_name: "appdevops"
     metrics_path: "/actuator/prometheus"
     static_configs:
-      - targets: ["host.docker.internal:9000"] # สำหรับ Windows/Mac
-      # - targets: ["app:8080"]                # ถ้า app รันใน container เดียวกัน
+      #- targets: ["host.docker.internal:8080"] # สำหรับ Windows/Mac
+       - targets: ["appdevops:8080"]                # ถ้า app รันใน container เดียวกัน
