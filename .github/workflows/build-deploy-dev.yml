@@ -76,7 +76,7 @@ jobs:
           images: ${{ env.IMAGE_NAME }}
           tags: |
             type=sha
-            type=raw,value=latest
+            type=raw,value=latest-dev
             type=raw,value=run-${{ github.run_number }}
           labels: |
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
