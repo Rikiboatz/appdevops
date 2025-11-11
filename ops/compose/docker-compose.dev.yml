@@ -1,9 +1,22 @@
 version: "3.9"
 services:
   app:
-    image: ghcr.io/rikiboatz/rikiboatz/appdevops/appdevops:latest-dev
+    image: ghcr.io/rikiboatz/appdevops:latest-dev
     environment:
-      - SPRING_PROFILES_ACTIVE=dev
+      SPRING_PROFILES_ACTIVE: dev
+
+      # JDBC (สำคัญ: ขึ้นต้น jdbc:)
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/example
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: P@ssw0rd
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+
+      # เปิด log เพื่อไล่ปัญหา
+      LOGGING_LEVEL_ORG_HIBERNATE_SQL: debug
+      LOGGING_LEVEL_ORG_HIBERNATE_TYPE_DESCRIPTOR_SQL_BASICBINDER: trace
+
     ports:
-      - "9000:9000"
+      - "9002:9000"
     restart: unless-stopped
