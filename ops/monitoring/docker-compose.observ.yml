@@ -11,6 +11,8 @@ services:
       - prom_data:/prometheus
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
+    networks:
+      - monitor-net
     restart: unless-stopped
 
   grafana:
@@ -24,6 +26,8 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     depends_on:
       - prometheus
+    networks:
+      - monitor-net
     restart: unless-stopped
 
   node-exporter:
@@ -38,18 +42,23 @@ services:
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
+    networks:
+      - monitor-net
     restart: unless-stopped
 
-  cadvisor:
-    image: gcr.io/cadvisor/cadvisor
-    container_name: cadvisor
-    ports:
-      - "8080:8080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-    restart: unless-stopped
+  # cadvisor:
+  #   image: gcr.io/cadvisor/cadvisor
+  #   container_name: cadvisor
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - /var/lib/docker/:/var/lib/docker:ro
+  #   restart: unless-stopped
 
 volumes:
   prom_data:
   grafana_data:
+
+networks:
+  monitor-net:
